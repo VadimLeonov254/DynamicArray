@@ -1,26 +1,6 @@
-#include <iostream>
-#include <stdexcept>
-
-class DynArray {
-private:
-    int* data;
-    int size = 0;
-    int capacity = 2;
-
-public:
-    DynArray();
-    DynArray(const DynArray& other);
-    ~DynArray();
-    void push_back(int x);
-    void insert(int position, int element);
-    void erase(int position);
-    void clear();
-    int get_size() const;
-    int get_capacity() const;
-    int& operator[](int index);
-    const int& operator[](int index) const;
-};
-
+#include "DynArray.h"
+#include<iostream>
+#include<stdexcept>
 DynArray::DynArray() {
     data = new int[capacity];
 }
@@ -99,6 +79,53 @@ const int& DynArray::operator[](int index) const {
     return data[index];
 }
 
+
+
+DynArray::DynArray(DynArray&& other) noexcept{
+
+    data = other.data;
+    size = other.size;
+    capacity = other.capacity;
+    
+    other.data = nullptr;
+    other.size = 0;
+    other.capacity = 0;
+}
+
+
+DynArray& DynArray::operator = (DynArray&& other) noexcept{
+    if(this != &other){
+        delete[] data;
+
+        data = other.data;
+        size = other.size;
+        capacity = other.capacity;
+
+        other.data = nullptr;
+        other.size = 0;
+        other.capacity = 0;
+
+    }
+    return *this;
+
+}
+
+DynArray& DynArray::operator=(const DynArray& other){
+    if(this == &other){
+       return *this;
+    }
+    delete[] data;
+    size = other.size;
+    capacity = other.capacity;
+    data = new int[capacity];
+
+    for(int i = 0; i < size; i++){
+        data[i] = other.data[i];
+    }
+    return *this;
+}
+
+
 int DynArray::get_size() const {
     return size;
 }
@@ -107,34 +134,3 @@ int DynArray::get_capacity() const {
     return capacity;
 }
 
-int main() {
-    DynArray arr;
-    //pushing numbers back in the dynamic array
-    arr.push_back(10);
-    arr.push_back(20);
-    arr.push_back(30);
-    std::cout << "After push_back: ";
-    for (int i = 0; i < arr.get_size(); i++)
-        std::cout << arr[i] << " ";
-    std::cout << "\n";
-
-    //inserting a new element(15) in the position 1 -> .insert(position, element)
-    arr.insert(1, 15);
-    std::cout << "After insert at index 1: ";
-    for (int i = 0; i < arr.get_size(); i++)
-        std::cout << arr[i] << " ";
-    std::cout << "\n";
-
-    //erasing the element at the index of the dynamic array
-    arr.erase(2);
-    std::cout << "After erase at index 2: ";
-    for (int i = 0; i < arr.get_size(); i++)
-        std::cout << arr[i] << " ";
-    std::cout << "\n";
-
-    //clearing the entire dynamic array
-    arr.clear();
-    std::cout << "After clear, size = " << arr.get_size() << "\n";
-
-    return 0;
-}

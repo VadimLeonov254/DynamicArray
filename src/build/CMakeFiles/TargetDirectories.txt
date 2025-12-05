@@ -1,0 +1,3 @@
+/home/vadim/DynamicArray/src/build/CMakeFiles/app.dir
+/home/vadim/DynamicArray/src/build/CMakeFiles/edit_cache.dir
+/home/vadim/DynamicArray/src/build/CMakeFiles/rebuild_cache.dir

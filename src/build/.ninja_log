@@ -1,0 +1,6 @@
+# ninja log v5
+1	424	1764901626787102146	CMakeFiles/app.dir/DynArray.cpp.o	ef56c1fe8cbe1968
+0	436	1764901626799102146	CMakeFiles/app.dir/main.cpp.o	cbb5f87e7a3b0eee
+2	413	1764901945385376258	CMakeFiles/app.dir/DynArray.cpp.o	ef56c1fe8cbe1968
+2	416	1764901945389376258	CMakeFiles/app.dir/main.cpp.o	cbb5f87e7a3b0eee
+416	618	1764901945585376254	app	5c678bd3020033ef
